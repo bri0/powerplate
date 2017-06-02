@@ -63,6 +63,7 @@ app.use(compression());
 app.use(sass({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
+  sourceMap: (process.env.NODE_ENV === 'development'),
 }));
 app.use(logger('dev'));
 app.use(bodyParser.json());

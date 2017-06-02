@@ -14,7 +14,7 @@ results
 tmp
 
 #Build
-public/assets/css/main.*
+public/assets/css/main.css
 public/assets/js/dist
 
 # API keys and secrets
