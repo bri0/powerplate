@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
 userSchema.index({ facebook: 1 });
 userSchema.index({ google: 1 });
 userSchema.index({ email: 1 });
-userSchema.index({ passwordResetToken: 1 }, { unique: true });
+userSchema.index({ passwordResetToken: 1 });
 
 /**
  * Password hash middleware.
