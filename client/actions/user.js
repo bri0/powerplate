@@ -51,7 +51,7 @@ register('userLogin', () => {
   }).then(() => {
     window.location.reload();
   }).catch((err) => {
-    if (err !== 'cancel') {
+    if (err !== 'cancel' && err !== 'overlay') {
       swal('Problem', err, 'error');
     }
   });
@@ -111,7 +111,7 @@ register('userCreate', () => {
   }).then(() => {
     window.location.reload();
   }).catch((err) => {
-    if (err !== 'cancel') {
+    if (err !== 'cancel' && err !== 'overlay') {
       swal('Problem', err, 'error');
     }
   });

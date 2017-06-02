@@ -3,7 +3,14 @@
 ### Demo
 https://powerplate.herokuapp.com/
 
+## Development
+
+Run `npm run dev` for server-side live reload
+Run `npm run eslint` to lint the code.
+
 ## Deployment
+
+Deployment will fail if linting causes error.
 
 ### Deploy to Heroku
 
