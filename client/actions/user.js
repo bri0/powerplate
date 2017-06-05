@@ -17,7 +17,11 @@ register('onReady', () => {
         })
         .then(() => window.location.reload())
         .catch(({ entity }) => Promise.reject(entity.message || 'Server Error'))
-      );
+      ).catch((err) => {
+        if (err !== 'cancel' && err !== 'overlay') {
+          swal('Problem', err, 'error');
+        }
+      });
     }
   }
 });
