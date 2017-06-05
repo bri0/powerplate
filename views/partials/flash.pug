@@ -16,3 +16,5 @@ if messages.success
       i.fa.fa-times-circle-o
     for success in messages.success
       div= success.msg
+if messages.swal
+  input.swal-on-ready.hidden(data-object=messages)
