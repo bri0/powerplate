@@ -73,7 +73,7 @@ module.exports = {
         subject: 'Reset your password on Powerplate',
         recipient: { email },
         content: xtmpl(resetPasswordTpl, { resetPasswordURL: `http://${req.headers.host}/reset/${user.passwordResetToken}` }),
-        fromEmail: 'tonny@devmail.gamechanger.ai',
+        fromEmail: 'tonny@powerplate.com',
       });
     }).then(() => ({ status: 'OK' }));
   }),

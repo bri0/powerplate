@@ -18,7 +18,7 @@ register('onReady', () => {
         .then(() => window.location.reload())
         .catch(({ entity }) => Promise.reject(entity.message || 'Server Error'))
       ).catch((err) => {
-        if (err !== 'cancel' && err !== 'overlay') {
+        if (err !== 'cancel' && err !== 'overlay' && err !== 'esc') {
           swal('Problem', err, 'error');
         }
       });
@@ -72,7 +72,7 @@ register('userLogin', () => {
   }).then(() => {
     window.location.reload();
   }).catch((err) => {
-    if (err !== 'cancel' && err !== 'overlay') {
+    if (err !== 'cancel' && err !== 'overlay' && err !== 'esc') {
       swal('Problem', err, 'error');
     }
   });
@@ -132,7 +132,7 @@ register('userCreate', () => {
   }).then(() => {
     window.location.reload();
   }).catch((err) => {
-    if (err !== 'cancel' && err !== 'overlay') {
+    if (err !== 'cancel' && err !== 'overlay' && err !== 'esc') {
       swal('Problem', err, 'error');
     }
   });
@@ -157,7 +157,7 @@ register('forgotPassword', () => {
       }).catch(({ entity }) => Promise.reject(entity.message || 'Server Error'));
     },
   }]).catch((err) => {
-    if (err !== 'cancel' && err !== 'overlay') {
+    if (err !== 'cancel' && err !== 'overlay' && err !== 'esc') {
       swal('Problem', err, 'error');
     }
   });
