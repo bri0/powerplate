@@ -2,7 +2,28 @@ const { register } = require('../actions');
 const { postRequest } = require('../rest');
 
 register('onReady', () => {
-  console.log('This is example for action on ready');
+  if ($('input.swal-on-ready.hidden')) {
+    const data = $('input.swal-on-ready.hidden').data('object');
+    if (data.swal && data.swal.length) {
+      const token = data.swal[0].token;
+      swal(data.swal[0]).then((password) =>
+        postRequest(`/reset/${token}`, { password }).then(({ entity }) => {
+          if (entity.status !== 'OK') return Promise.reject('Something wrong');
+          return swal({
+            title: 'Success!',
+            text: 'Your password has been changed.',
+            type: 'success',
+          });
+        })
+        .then(() => window.location.reload())
+        .catch(({ entity }) => Promise.reject(entity.message || 'Server Error'))
+      ).catch((err) => {
+        if (err !== 'cancel' && err !== 'overlay' && err !== 'esc') {
+          swal('Problem', err, 'error');
+        }
+      });
+    }
+  }
 });
 
 register('userLogout', () => {
@@ -51,7 +72,7 @@ register('userLogin', () => {
   }).then(() => {
     window.location.reload();
   }).catch((err) => {
-    if (err !== 'cancel' && err !== 'overlay') {
+    if (err !== 'cancel' && err !== 'overlay' && err !== 'esc') {
       swal('Problem', err, 'error');
     }
   });
@@ -111,7 +132,32 @@ register('userCreate', () => {
   }).then(() => {
     window.location.reload();
   }).catch((err) => {
-    if (err !== 'cancel' && err !== 'overlay') {
+    if (err !== 'cancel' && err !== 'overlay' && err !== 'esc') {
+      swal('Problem', err, 'error');
+    }
+  });
+});
+
+register('forgotPassword', () => {
+  swal.queue([{
+    confirmButtonText: 'Next &rarr;',
+    title: 'Forgot Password',
+    input: 'email',
+    text: 'Enter your email',
+    showLoaderOnConfirm: true,
+    preConfirm(email) {
+      return postRequest('/api/forgotPassword', { email }).then(({ entity }) => {
+        if (entity.status !== 'OK') return Promise.reject('Something wrong');
+        swal.insertQueueStep({
+          title: 'Email Sent!',
+          text: `An e-mail has been sent to ${email} with further instructions.`,
+          type: 'success',
+        });
+        return Promise.resolve(email);
+      }).catch(({ entity }) => Promise.reject(entity.message || 'Server Error'));
+    },
+  }]).catch((err) => {
+    if (err !== 'cancel' && err !== 'overlay' && err !== 'esc') {
       swal('Problem', err, 'error');
     }
   });

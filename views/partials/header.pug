@@ -17,6 +17,8 @@
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)
             a(href='#' data-action="userLogin") Login
+          li(class=(title == 'Forgot Password') ? 'active' : undefined)
+            a(href='#' data-action="forgotPassword") Forgot Password
           li(class=(title == 'Create Account') ? 'active' : undefined)
             a(href='#' data-action="userCreate") Create Account
         else
