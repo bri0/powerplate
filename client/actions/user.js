@@ -2,7 +2,7 @@ const { register } = require('../actions');
 const { postRequest } = require('../rest');
 
 register('onReady', () => {
-  if ($('input.swal-on-ready.hidden')) {
+  if ($('input.swal-on-ready.hidden').length > 0) {
     const data = $('input.swal-on-ready.hidden').data('object');
     if (data && data.swal && data.swal.length) {
       const token = data.swal[0].token;
@@ -161,4 +161,14 @@ register('forgotPassword', () => {
       swal('Problem', err, 'error');
     }
   });
+});
+
+register('editprofile', () => {
+  $('#profile').addClass('hidden');
+  $('#profile_form').removeClass('hidden');
+});
+
+register('cancel_editprofile', () => {
+  $('#profile').removeClass('hidden');
+  $('#profile_form').addClass('hidden');
 });

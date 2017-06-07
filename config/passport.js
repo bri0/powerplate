@@ -146,7 +146,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, don
 /**
  * Login Required middleware.
  */
-exports.isAuthenticated = (req, res, next) => (req.isAuthenticated() ? next() : res.redirect('/login'));
+exports.isAuthenticated = (req, res, next) => (req.isAuthenticated() ? next() : res.redirect('/'));
 
 /**
  * Required Not-logged-in middleware.
