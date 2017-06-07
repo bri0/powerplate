@@ -15,6 +15,7 @@ tmp
 
 #Build
 public/assets/css/main.css
+public/assets/css/main.css.map
 public/assets/js/dist
 
 # API keys and secrets
