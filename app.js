@@ -2,6 +2,7 @@
  * Module dependencies.
  */
 const express = require('express');
+const helmet = require('helmet');
 const compression = require('compression');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -58,6 +59,7 @@ mongoose.connection.on('error', (err) => {
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.use(helmet());
 app.use(expressStatusMonitor());
 app.use(compression());
 app.use(sass({
