@@ -10,8 +10,8 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery"
+      $: "jquery/dist/jquery.slim.min",
+      jQuery: "jquery/dist/jquery.slim.min"
     }),
   ]
 };

@@ -41,6 +41,7 @@ const passportConfig = require('./config/passport');
  * Create Express server.
  */
 const app = express();
+app.locals.isProd = process.env.NODE_ENV === 'production';
 
 /**
  * Connect to MongoDB.
@@ -127,7 +128,6 @@ app.get('/reset/:token', passportConfig.isUnauthenticated, userController.getRes
 app.post('/reset/:token', passportConfig.isUnauthenticated, userController.postResetPassword);
 
 app.use((err, req, res, next) => {
-  console.log(err);
   if (err) {
     if (req.headers['x-requested-with'] === 'RESTClient') {
       if (err instanceof Error) return res.status(500).json({ status: 'error', message: err.message });

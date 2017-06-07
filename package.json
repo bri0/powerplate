@@ -17,6 +17,10 @@
     "predebug": "./node_modules/.bin/webpack",
     "preheroku-push": "npm run prebuild; git remote set-url heroku https://git.heroku.com/powerplate.git",
     "heroku-push": "heroku container:push web",
+    "minify": "./node_modules/.bin/uglifyjs public/assets/js/dist/bundle.js -o public/assets/js/dist/bundle.min.js",
+    "preheroku-push-prod": "npm run prebuild; npm run minify; git remote set-url heroku https://git.heroku.com/powerplate.git",
+    "heroku-push-prod": "heroku container:push web",
+    "postheroku-push-prod": "git remote set-url heroku https://git.heroku.com/powerplate.git",
     "debug": "node --inspect app.js",
     "prebuild": "./node_modules/.bin/webpack; npm run eslint",
     "build": "docker build -t livi0/gamechanger .",
@@ -76,6 +80,7 @@
     "nodemon": "^1.11.0",
     "sinon": "^2.3.2",
     "supertest": "^3.0.0",
+    "uglify-es": "^3.0.15",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
   },

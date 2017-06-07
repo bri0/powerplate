@@ -4,7 +4,7 @@ const { postRequest } = require('../rest');
 register('onReady', () => {
   if ($('input.swal-on-ready.hidden')) {
     const data = $('input.swal-on-ready.hidden').data('object');
-    if (data.swal && data.swal.length) {
+    if (data && data.swal && data.swal.length) {
       const token = data.swal[0].token;
       swal(data.swal[0]).then((password) =>
         postRequest(`/reset/${token}`, { password }).then(({ entity }) => {

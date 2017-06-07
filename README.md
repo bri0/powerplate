@@ -3,6 +3,10 @@
 ### Demo
 https://powerplate.herokuapp.com/
 
+## Features
+
+###
+
 ## Development
 
 Run `npm run dev` for server-side live reload
@@ -65,3 +69,7 @@ $ npm run heroku-push
 Everytime you want to update your heroku, just re-run the command
 
 If you want to have multiple environment, follow the example in `package.json`
+
+## Future Plan
+
+- Add React

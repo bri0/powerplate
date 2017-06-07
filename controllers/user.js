@@ -16,7 +16,6 @@ module.exports = {
     const errors = req.validationErrors();
     if (errors) {
       const { param, msg } = errors[0];
-      console.log(errors);
       return Promise.reject({ param, message: msg });
     }
 
@@ -47,7 +46,6 @@ module.exports = {
     const error = { message: 'Invalid Email or Password' };
     if (!email || !password) return Promise.reject(error);
     return User.findOne({ email }).then((user) => {
-      console.log(user);
       if (!user) return Promise.reject(error);
       return user.comparePassword(password).then((samePassword) => {
         if (!samePassword) return Promise.reject(error);
@@ -95,7 +93,6 @@ module.exports = {
     const errors = req.validationErrors();
     if (errors) {
       const { param, msg } = errors[0];
-      console.log(errors);
       return Promise.reject({ param, message: msg });
     }
     return User

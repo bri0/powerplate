@@ -43,7 +43,10 @@ html
         div.dot1
         div.dot2
 
-    script(src=assetFingerprint('/assets/js/dist/bundle.js'))
+    if isProd
+      script(src=assetFingerprint('/assets/js/dist/bundle.min.js'))
+    else
+      script(src=assetFingerprint('/assets/js/dist/bundle.js'))
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID
     script.
