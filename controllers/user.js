@@ -113,11 +113,11 @@ module.exports = {
   getProfile(req, res) {
     res.render('account/profile');
   },
-  postUpdateProfile: promisifyJSON((req, res) => {
+  postUpdateProfile: promisifyJSON((req) => {
     const errors = req.validationErrors();
     if (errors) {
-      req.flash('errors', errors);
-      return res.redirect('/account/profile');
+      console.log(errors);
+      return Promise.reject({ errors });
     }
     const user = req.user;
     user.profile.name = req.body.name || user.profile.name;
@@ -131,8 +131,7 @@ module.exports = {
         console.log(err);
         return Promise.reject(new Error(err.message));
       }
-      req.flash('success', { msg: 'Profile information has been updated.' });
-      return res.redirect('/account/profile');
+      return { status: 'OK', message: 'Profile information has been updated.' };
     });
   }),
 };
