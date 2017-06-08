@@ -126,6 +126,8 @@ app.post('/api/checkEmail', userController.postCheckEmail);
 app.post('/api/forgotPassword', userController.postForgotPassword);
 app.get('/reset/:token', passportConfig.isUnauthenticated, userController.getResetPassword);
 app.post('/reset/:token', passportConfig.isUnauthenticated, userController.postResetPassword);
+app.get('/account/profile', passportConfig.isAuthenticated, userController.getProfile);
+app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
 
 app.use((err, req, res, next) => {
   if (err) {

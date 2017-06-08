@@ -1,0 +1,65 @@
+extends ../layout
+
+block content
+  .main.container
+    h1.display-4.m-b-2 Profile
+
+    .row#profile
+      .col-md-6.col-md-offset-3
+        table.table.table-striped
+          tbody
+            tr
+              td.col-sm-5 Name
+              td=user.profile.name
+            tr
+              td.col-sm-5 Email
+              td=user.email
+            tr
+              td.col-sm-5 Gender
+              td=user.profile.gender
+            tr
+              td.col-sm-5 Location
+              td=user.profile.location
+            tr
+              td.col-sm-5 Website
+              td=user.profile.website
+
+        button.btn.btn-primary(data-action="editprofile")
+          i.fa.fa-pencil
+          | Edit
+
+    .row.hidden#profile_form
+      .col-md-6.col-md-offset-3
+        form(method='POST' action='/account/profile')
+          input(type='hidden', name='_csrf', value=_csrf)
+          div.form-group
+            label(for='name') Name:
+            input#name.form-control(type='text', placeholder='First and last' name='name', value=user.profile.name)
+          div.form-group
+            label(for='email') Email:
+            input#name.form-control(type='text', placeholder='Email' name='email', value=user.email)
+          div.form-group
+            label(for='gender') Gender:
+            br
+            label.radio-inline
+              input#optionsRadios(type="radio", name="gender", value="male", checked=user.profile.gender=="male")
+              | Male
+            label.radio-inline
+              input#optionsRadios(type="radio", name="gender", value="female", checked=user.profile.gender=="female")
+              | Female
+            label.radio-inline
+              input#optionsRadios(type="radio", name="gender", value="other", checked=user.profile.gender=="other")
+              | Other
+          div.form-group
+            label(for='location') Location:
+            input#name.form-control(type='text', placeholder='Location' name='location', value=user.profile.location)
+          div.form-group
+            label(for='location') Website:
+            input#name.form-control(type='text', placeholder='Website' name='website', value=user.profile.website)
+          div.form-group
+            button.btn.btn-primary(type='button' data-action="update_profile")
+              i.fa.fa-save
+              | Update
+            button.btn.btn-default.pull-right(type='button' data-action="cancel_editprofile")
+              i.fa.fa-close
+              | Cancel

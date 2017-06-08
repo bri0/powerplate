@@ -110,4 +110,28 @@ module.exports = {
       .then((user) => promisifyObjCallback(req, 'logIn')(user))
       .then(() => ({ status: 'OK', message: 'Your password has been changed.' }));
   }),
+  getProfile(req, res) {
+    res.render('account/profile');
+  },
+  postUpdateProfile: promisifyJSON((req) => {
+    const errors = req.validationErrors();
+    if (errors) {
+      console.log(errors);
+      return Promise.reject({ errors });
+    }
+    const user = req.user;
+    user.profile.name = req.body.name || user.profile.name;
+    user.email = req.body.email || user.email;
+    user.profile.gender = req.body.gender || user.profile.gender;
+    user.profile.location = req.body.location || user.profile.location;
+    user.profile.website = req.body.website || user.profile.website;
+    return user.save()
+    .then((u, err) => {
+      if (err) {
+        console.log(err);
+        return Promise.reject(new Error(err.message));
+      }
+      return { status: 'OK', message: 'Profile information has been updated.' };
+    });
+  }),
 };
