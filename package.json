@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "test": "snyk test && mocha --reporter spec",
+    "test": "./node_modules/.bin/snyk test && mocha --reporter spec",
     "preserve": "./node_modules/.bin/webpack",
     "serve": "node app.js",
     "dev": "./node_modules/.bin/nodemon --watch . --ignore 'public/assets/js/dist' --delay 250ms --exec 'npm run serve'",
@@ -27,7 +27,7 @@
     "git-pull-submodules": "git submodule foreach git pull origin master",
     "eslint": "./node_modules/.bin/eslint app.js client con controllers lib models",
     "clgit": "git branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs git branch -d",
-    "snyk-protect": "snyk protect",
+    "snyk-protect": "./node_modules/.bin/snyk protect",
     "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
