@@ -123,8 +123,8 @@ module.exports = {
     user.profile.name = req.body.name || user.profile.name;
     user.email = req.body.email || user.email;
     user.profile.gender = req.body.gender || user.profile.gender;
-    user.profile.location = req.body.location || user.profile.location;
-    user.profile.website = req.body.website || user.profile.website;
+    user.profile.location = req.body.location || '';
+    user.profile.website = req.body.website || '';
     return user.save()
     .then((u, err) => {
       if (err) {

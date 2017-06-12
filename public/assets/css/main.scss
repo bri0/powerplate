@@ -6,6 +6,133 @@
 
 @import "themes/default/default";
 
+@import "node_modules/material-components-web/dist/material-components-web.min";
+/* Base style */
+
+:root {
+  --mdc-theme-primary: #212121;
+  --mdc-theme-accent: #64DD17;
+}
+
+/* Ensure layout covers the entire screen. */
+html {
+  height: 100%;
+}
+/* Place drawer and content side by side. */
+.demo-body {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+/* A simple menu button. */
+.main-menu {
+  background: none;
+  border: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  margin-right: 24px;
+  color: #FFF;
+  box-sizing: border-box;
+}
+/* Stack toolbar and main on top of each other. */
+.demo-content {
+  display: inline-flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+  box-sizing: border-box;
+}
+.demo-body {
+  margin: 0px;
+}
+.demo-paragraph {
+  margin: 0px;
+  padding: 20px 28px;
+}
+.material-icons {
+  text-decoration: none;
+  cursor: pointer;
+  padding-right: 8px;
+  color: white;
+}
+[dir='rtl'] .material-icons {
+  padding-left: 8px;
+}
+@media (max-width: 599px) {
+  .demo-paragraph {
+    padding: 16px;
+  }
+}
+.mdc-persistent-drawer__toolbar-spacer img {
+    height: 100%;
+    width: auto;
+    margin-right: 24px;
+}
+.mdc-persistent-drawer__toolbar-spacer span {
+  display: inline-flex;
+  align-items: center;
+}
+.mdc-theme--dark {
+  background-color: #303030;
+}
+input[type="checkbox"]:disabled + label {
+  opacity: .4;
+}
+.mdc-textfield__input {
+  min-width: 240px;
+}
+
+body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.mdc-toolbar a, .mdc-toolbar a:visited {
+  text-decoration: none;
+  color: #f0f0f0;
+}
+
+.catalog-title {
+  font-family: "Roboto Mono", monospace;
+}
+
+.catalog-logo, .catalog-back {
+  text-decoration: none;
+  padding-right: 24px;
+  color: #eeeeee;
+}
+
+.hero {
+  background-color: rgba(0, 0, 0, 0.05);
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row nowrap;
+  height: 360px;
+}
+
+/* Default padding on all examples. */
+section.example {
+  padding: 24px;
+  margin: 24px;
+}
+
+section.example h2 {
+  margin-left: 0;
+}
+
 // Scaffolding
 // -------------------------
 
