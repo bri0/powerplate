@@ -20,6 +20,7 @@ public/assets/js/dist
 
 # API keys and secrets
 .env
+.bin/env.json
 
 # Dependency directory
 node_modules
