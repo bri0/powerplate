@@ -163,16 +163,6 @@ register('forgotPassword', () => {
   });
 });
 
-register('editprofile', () => {
-  $('#profile').addClass('hidden');
-  $('#profile_form').removeClass('hidden');
-});
-
-register('cancel_editprofile', () => {
-  $('#profile').removeClass('hidden');
-  $('#profile_form').addClass('hidden');
-});
-
 register('update_profile', () => {
   const formData = $('#profile_form').find('form').serializeArray();
   const data = {};
@@ -190,4 +180,47 @@ register('update_profile', () => {
     });
   })
   .catch(({ entity }) => swal('Problem', entity.message, 'error'));
+});
+
+register('changePassword', () => {
+  swal({
+    confirmButtonText: 'Next &rarr;',
+    title: 'Change Password',
+    input: 'password',
+    text: 'Enter your current password',
+  }).then((currentPassword) =>
+    swal.queue([{
+      confirmButtonText: 'Update Password',
+      title: 'Change Password',
+      input: 'password',
+      text: 'Enter your new password',
+      showLoaderOnConfirm: true,
+      animation: false,
+      preConfirm(newPassword) {
+        return postRequest('/account/changePassword', { currentPassword, newPassword }).then(({ entity }) => {
+          if (entity.status === 'OK') {
+            swal.insertQueueStep({
+              title: 'Password updated!',
+              text: 'Your password has been changed!',
+              type: 'success',
+            });
+            return Promise.resolve();
+          }
+          return Promise.reject({ entity: { message: 'Server Error!' } });
+        }).catch(({ entity }) => {
+          const msg = entity.message || 'Server Error';
+          swal.insertQueueStep({
+            title: 'Problem',
+            text: msg,
+            type: 'error',
+          });
+          return Promise.resolve();
+        });
+      },
+    }])
+  ).catch((err) => {
+    if (err !== 'cancel' && err !== 'overlay' && err !== 'esc') {
+      swal('Problem', err, 'error');
+    }
+  });
 });
