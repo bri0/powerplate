@@ -9,11 +9,11 @@ https://powerplate.herokuapp.com/
 
 ## Development
 
-Run `npm run dev` for server-side live reload.  
+Run `npm run dev` for server-side live reload.
 Run `npm run eslint` to lint the code.
 
 ## Testing
-Run `npm test`  
+Run `npm test`
 If asked for snyk authentication, run `./node_modules/.bin/snyk auth`
 
 ## Deployment
@@ -47,6 +47,9 @@ heroku plugins:install heroku-container-registry
 # Log in to Heroku container registry
 heroku container:login
 
+# Add default heroku remote
+node .bin/env.js add herokuUrls default https://git.heroku.com/your-app-name.git
+
 # Deploy to heroku
 npm run heroku-push
 ```
@@ -56,7 +59,20 @@ Everytime you want to update your heroku, just re-run the command
 npm run heroku-push
 ```
 
-If you want to have multiple environment, follow the example in `package.json`
+### Add multiple environments
+
+```
+# Create a Heroku app
+heroku apps:create your-app-name-dev
+heroku apps:create your-app-name-stg
+
+# Add new heroku deployment environment
+node .bin/env.js add herokuUrls dev https://git.heroku.com/your-app-name-dev.git
+node .bin/env.js add herokuUrls dev https://git.heroku.com/your-app-name-stg.git
+
+# Select the push environment
+pushEnv=dev npm run heroku-push
+```
 
 ## Future Plan
 
