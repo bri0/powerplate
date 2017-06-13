@@ -9,8 +9,12 @@ https://powerplate.herokuapp.com/
 
 ## Development
 
-Run `npm run dev` for server-side live reload
+Run `npm run dev` for server-side live reload.  
 Run `npm run eslint` to lint the code.
+
+## Testing
+Run `npm test`  
+If asked for snyk authentication, run `./node_modules/.bin/snyk auth`
 
 ## Deployment
 
