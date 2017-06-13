@@ -163,8 +163,8 @@ register('forgotPassword', () => {
   });
 });
 
-register('update_profile', () => {
-  const formData = $('#profile_form').find('form').serializeArray();
+register('updateProfile', () => {
+  const formData = $('#profile_form').serializeArray();
   const data = {};
   $(formData).each((index, obj) => {
     data[obj.name] = obj.value;
@@ -183,44 +183,22 @@ register('update_profile', () => {
 });
 
 register('changePassword', () => {
-  swal({
-    confirmButtonText: 'Next &rarr;',
-    title: 'Change Password',
-    input: 'password',
-    text: 'Enter your current password',
-  }).then((currentPassword) =>
-    swal.queue([{
-      confirmButtonText: 'Update Password',
-      title: 'Change Password',
-      input: 'password',
-      text: 'Enter your new password',
-      showLoaderOnConfirm: true,
-      animation: false,
-      preConfirm(newPassword) {
-        return postRequest('/account/changePassword', { currentPassword, newPassword }).then(({ entity }) => {
-          if (entity.status === 'OK') {
-            swal.insertQueueStep({
-              title: 'Password updated!',
-              text: 'Your password has been changed!',
-              type: 'success',
-            });
-            return Promise.resolve();
-          }
-          return Promise.reject({ entity: { message: 'Server Error!' } });
-        }).catch(({ entity }) => {
-          const msg = entity.message || 'Server Error';
-          swal.insertQueueStep({
-            title: 'Problem',
-            text: msg,
-            type: 'error',
-          });
-          return Promise.resolve();
-        });
-      },
-    }])
-  ).catch((err) => {
-    if (err !== 'cancel' && err !== 'overlay' && err !== 'esc') {
-      swal('Problem', err, 'error');
+  const formData = $('#change_password_form').serializeArray();
+  const data = {};
+  $(formData).each((index, obj) => {
+    data[obj.name] = obj.value;
+  });
+  return postRequest('/account/changePassword', data)
+  .then(({ entity }) => {
+    if (entity.status === 'OK') {
+      return swal('Password updated!', 'Your password has been changed!', 'success')
+      .then(() => {
+        window.location.reload();
+      });
     }
+    return Promise.reject({ entity: { message: 'Server Error!' } });
+  }).catch(({ entity }) => {
+    const msg = entity.message || 'Server Error';
+    return swal('Problem', msg, 'error');
   });
 });
