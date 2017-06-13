@@ -10,7 +10,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "test": "./node_modules/.bin/snyk test && mocha --reporter spec",
+    "pretest": "./node_modules/.bin/snyk test",
+    "test": "./node_modules/.bin/mocha **/*.test.js --reporter spec",
     "preserve": "./node_modules/.bin/webpack",
     "serve": "node app.js",
     "dev": "./node_modules/.bin/nodemon --watch . --ignore 'public/assets/js/dist' --delay 250ms --exec 'npm run serve'",
