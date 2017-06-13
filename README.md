@@ -20,8 +20,11 @@ If asked for snyk authentication, run `./node_modules/.bin/snyk auth`
 
 Deployment will fail if linting causes error.
 
-### Deploy to Heroku
+### Deploy to Heroku via Docker
 
+#### Preparation
+
++ Make sure you have a working Docker installation
 ```bash
 # Install Heroku CLI
 brew install heroku
@@ -38,39 +41,20 @@ heroku git:remote -a your-app-name
 # Set up mLab add-on
 heroku addons:create mongolab -a your-app-name
 
-# Deploy your application
-git push heroku master
-```
+# Install Heroku container registry
+heroku plugins:install heroku-container-registry
 
-### Deploy to Heroku via Docker
+# Log in to Heroku container registry
+heroku container:login
 
-#### Preparation
-
-+ Make sure you have a working Docker installation
-+ Make sure you’re logged in to Heroku
-+ Make sure you're working on Git repository
-+ Install the container-registry plugin by running:
-```bash
-$ heroku plugins:install heroku-container-registry
-```
-+ Log in to the Heroku container registry:
-```bash
-$ heroku container:login
-```
-+ Add the heroku remote of your, in this case it is `powerplate`
-```bash
-$ heroku git:remote -a powerplate
-```
-+ Edit the `package.json` and change to your git remote
-
-#### Deploy
-
-Deploy as simple as
-```bash
-$ npm run heroku-push
+# Deploy to heroku
+npm run heroku-push
 ```
 
 Everytime you want to update your heroku, just re-run the command
+```bash
+npm run heroku-push
+```
 
 If you want to have multiple environment, follow the example in `package.json`
 
