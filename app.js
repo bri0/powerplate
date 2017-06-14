@@ -128,6 +128,7 @@ app.get('/reset/:token', passportConfig.isUnauthenticated, userController.getRes
 app.post('/reset/:token', passportConfig.isUnauthenticated, userController.postResetPassword);
 app.get('/account/profile', passportConfig.isAuthenticated, userController.getProfile);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
+app.post('/account/changePassword', passportConfig.isAuthenticated, userController.postChangePassword);
 
 app.use((err, req, res, next) => {
   if (err) {

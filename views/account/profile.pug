@@ -3,9 +3,9 @@ extends ../layout
 block content
   .main.container
     h1.mdc-typography--display1 Profile
-    .row#profile_form
+    .row
       .col-md-6.col-md-offset-3
-        form(method='POST' action='/account/profile')
+        form#profile_form
           input(type='hidden', name='_csrf', value=_csrf)
           section#demo-textfield-wrapper
             .mdc-textfield
@@ -47,5 +47,24 @@ block content
               input#my-textfield.mdc-textfield__input(type='text', name='website', aria-controls='my-textfield-helptext', data-demo-no-auto-js='', value=user.profile.website)
               label.mdc-textfield__label(for='my-textfield') Website
           div.form-group
-            button.mdc-button.mdc-button--raised.mdc-button--primary(type='button', data-action="update_profile")
-              | Update
+            button.mdc-button.mdc-button--raised.mdc-button--primary(type='button', data-action="updateProfile")
+              | Update Profile
+    <br>
+    <br>
+
+    h1.mdc-typography--display1 Change Password
+    .row
+      .col-md-6.col-md-offset-3
+        form#change_password_form
+          input(type='hidden', name='_csrf', value=_csrf)
+          section#demo-textfield-wrapper
+            .mdc-textfield
+              input#my-textfield.mdc-textfield__input(type='password', name='currentPassword', aria-controls='my-textfield-helptext', data-demo-no-auto-js='', required)
+              label.mdc-textfield__label(for='my-textfield') Current Password
+          section#demo-textfield-wrapper
+            .mdc-textfield
+              input#my-textfield.mdc-textfield__input(type='password', name='newPassword', aria-controls='my-textfield-helptext', data-demo-no-auto-js='', required)
+              label.mdc-textfield__label(for='my-textfield') New Password
+          div.form-group
+            button.mdc-button.mdc-button--raised.mdc-button--primary(type='button', data-action="changePassword")
+              | Change Password

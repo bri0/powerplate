@@ -134,4 +134,30 @@ module.exports = {
       return { status: 'OK', message: 'Profile information has been updated.' };
     });
   }),
+  postChangePassword: promisifyJSON((req) => {
+    req.assert('newPassword', 'Password must be at least 4 characters long').len(4);
+    const errors = req.validationErrors();
+    if (errors) {
+      const { param, msg } = errors[0];
+      return Promise.reject({ param, message: msg });
+    }
+    const user = req.user;
+    const { currentPassword, newPassword } = req.body;
+    return user.comparePassword(currentPassword)
+    .then((samePassword) => {
+      if (!samePassword) return Promise.reject(new Error('Current password is invalid'));
+      return user;
+    })
+    .then((u) => {
+      u.password = newPassword;
+      return u.save();
+    })
+    .then((u, err) => {
+      if (err) {
+        console.log(err);
+        return Promise.reject(new Error(err.message));
+      }
+      return { status: 'OK' };
+    });
+  }),
 };

@@ -163,18 +163,8 @@ register('forgotPassword', () => {
   });
 });
 
-register('editprofile', () => {
-  $('#profile').addClass('hidden');
-  $('#profile_form').removeClass('hidden');
-});
-
-register('cancel_editprofile', () => {
-  $('#profile').removeClass('hidden');
-  $('#profile_form').addClass('hidden');
-});
-
-register('update_profile', () => {
-  const formData = $('#profile_form').find('form').serializeArray();
+register('updateProfile', () => {
+  const formData = $('#profile_form').serializeArray();
   const data = {};
   $(formData).each((index, obj) => {
     data[obj.name] = obj.value;
@@ -190,4 +180,25 @@ register('update_profile', () => {
     });
   })
   .catch(({ entity }) => swal('Problem', entity.message, 'error'));
+});
+
+register('changePassword', () => {
+  const formData = $('#change_password_form').serializeArray();
+  const data = {};
+  $(formData).each((index, obj) => {
+    data[obj.name] = obj.value;
+  });
+  return postRequest('/account/changePassword', data)
+  .then(({ entity }) => {
+    if (entity.status === 'OK') {
+      return swal('Password updated!', 'Your password has been changed!', 'success')
+      .then(() => {
+        window.location.reload();
+      });
+    }
+    return Promise.reject({ entity: { message: 'Server Error!' } });
+  }).catch(({ entity }) => {
+    const msg = entity.message || 'Server Error';
+    return swal('Problem', msg, 'error');
+  });
 });
