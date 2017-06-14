@@ -1,9 +1,9 @@
 const mdcInit = () => {
   mdc.autoInit();
 
-  const drawerEl = document.querySelector('.mdc-persistent-drawer');
-  const MDCPersistentDrawer = mdc.drawer.MDCPersistentDrawer;
-  const drawer = new MDCPersistentDrawer(drawerEl);
+  const drawerEl = document.querySelector('.mdc-temporary-drawer');
+  const MDCTemporaryDrawer = mdc.drawer.MDCTemporaryDrawer;
+  const drawer = new MDCTemporaryDrawer(drawerEl);
   document.querySelector('.main-menu').addEventListener('click', () => {
     drawer.open = !drawer.open;
   });
