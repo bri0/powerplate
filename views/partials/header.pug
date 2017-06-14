@@ -1,6 +1,35 @@
-header.mdc-toolbar.mdc-elevation--z4
+.mdc-toolbar.mdc-toolbar--fixed
   .mdc-toolbar__row
     section.mdc-toolbar__section.mdc-toolbar__section--align-start
-      button.main-menu.material-icons menu
+      button.main-menu.material-icons.mdc-toolbar__icon--menu menu
       span.mdc-toolbar__title.catalog-title
         a(href='/') Nodejs Powerplate
+aside.mdc-temporary-drawer
+  nav.mdc-temporary-drawer__drawer
+    header.mdc-temporary-drawer__header
+      .mdc-temporary-drawer__header-content.mdc-theme--primary-bg.mdc-theme--text-primary-on-primary
+        if user
+          if user.profile.picture
+            img(src=user.profile.picture)
+          else
+            img(src=user.gravatar(60))
+          span.catalog-title= user.profile.name || user.email || user.id
+    nav.mdc-temporary-drawer__content.mdc-list-group
+      #icon-with-text-demo.mdc-list
+        if !user
+          a.mdc-list-item(href='#' data-action='userLogin')
+            i.material-icons.mdc-list-item__start-detail(aria-hidden='true') input
+            | Login
+          a.mdc-list-item(href='#' data-action='forgotPassword')
+            i.material-icons.mdc-list-item__start-detail(aria-hidden='true') lock_open
+            | Forgot Password
+          a.mdc-list-item(href='#' data-action='userCreate')
+            i.material-icons.mdc-list-item__start-detail(aria-hidden='true') person_add
+            | Create Account
+        else
+          a.mdc-list-item(href='/account/profile')
+            i.material-icons.mdc-list-item__start-detail(aria-hidden='true') account_box
+            | Profile
+          a.mdc-list-item(href='#' data-action='userLogout')
+            i.material-icons.mdc-list-item__start-detail(aria-hidden='true') power_settings_new
+            | Logout

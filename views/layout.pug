@@ -29,14 +29,14 @@ html
     link(rel='stylesheet', href=assetFingerprint('/assets/css/main.css'))
 
   body.demo-body.mdc-typography
-    include partials/drawer_left
+    // include partials/drawer_left
     .demo-content
       include partials/header
-      .container-fluid
+      .container-fluid.mdc-toolbar-fixed-adjust
         include partials/flash
         block content
 
-    include partials/footer
+        include partials/footer
     .loading-overlay
       .svgs.gears
 
