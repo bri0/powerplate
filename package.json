@@ -49,7 +49,7 @@
     "lob": "^3.9.0",
     "lusca": "^1.4.1",
     "mandrill-api": "^1.0.45",
-    "material-components-web": "^0.12.1",
+    "material-components-web": "^0.16.0",
     "material-design-icons": "^3.0.1",
     "moment": "^2.18.1",
     "mongoose": "^4.6.6",
