@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "pretest": "snyk test",
+    "snyktest": "snyk test",
     "test": "mocha **/*.test.js --reporter spec",
     "preserve": "webpack",
     "serve": "node app.js",
@@ -19,13 +19,14 @@
     "debug": "node --inspect app.js",
     "eslint": "eslint app.js client con controllers lib models",
     "minify": "uglifyjs public/assets/js/dist/bundle.js -o public/assets/js/dist/bundle.min.js",
-    "preheroku-push": "webpack; npm run eslint; npm run minify",
+    "preheroku-push": "npm run snyktest; webpack; npm run eslint; npm run minify",
     "heroku-push": "git remote set-url heroku `node .bin/env.js list herokuUrls $pushEnv`;heroku container:push web",
     "git-pull-submodules": "git submodule foreach git pull origin master",
     "clgit": "git branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs git branch -d",
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect"
   },
+  "pre-commit": ["eslint", "test"],
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
     "blueimp-tmpl": "^3.8.0",
@@ -75,6 +76,7 @@
     "eslint-plugin-import": "^2.1.0",
     "mocha": "^3.1.2",
     "nodemon": "^1.11.0",
+    "pre-commit": "^1.2.2",
     "sinon": "^2.3.2",
     "supertest": "^3.0.0",
     "uglify-es": "^3.0.15",
